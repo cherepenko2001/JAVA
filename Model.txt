@@ -1,0 +1,9 @@
+//метод, который возвращает список ВСЕХ наших кораблей
+    public List<Ship> getAllShips() {
+        List<Ship> allBoxesOfShips = new ArrayList<>();
+        allBoxesOfShips.addAll(shipsFourDeck);
+        allBoxesOfShips.addAll(shipsThreeDeck);
+        allBoxesOfShips.addAll(shipsTwoDeck);
+        allBoxesOfShips.addAll(shipsOneDeck);
+        return allBoxesOfShips;
+    }
