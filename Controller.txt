@@ -1,0 +1,21 @@
+public void loadEmptyMyField() {
+        //очистка списков всех типов кораблей
+        model.getShipsOneDeck().clear();
+        model.getShipsTwoDeck().clear();
+        model.getShipsThreeDeck().clear();
+        model.getShipsFourDeck().clear();
+        model.setMyField(new Box[Picture.COLUMNS][Picture.ROWS]);
+        //присваение элементам матрицы нашего игрового поля значений
+        for (int i = 0; i < Picture.ROWS; i++) {
+            for (int j = 0; j < Picture.COLUMNS; j++) {
+                if (i == 0 && j == 0) continue;
+                else if (i == 0 && j != 0) { //если это первый столбец то присваиваем значение картинок с буквами
+                    model.addBoxInField(model.getMyField(), new Box(Picture.valueOf("SYM" + j), Picture.IMAGE_SIZE * i, Picture.IMAGE_SIZE * j));
+                } else if (i != 0 && j == 0) { //если это первая строка присваиваем значение картинок с цифрами
+                    model.addBoxInField(model.getMyField(), new Box(Picture.valueOf("NUM" + i), Picture.IMAGE_SIZE * i, Picture.IMAGE_SIZE * j));
+                } else { //в остальных случаях знаяение картинки с пустой клеткой
+                    model.addBoxInField(model.getMyField(), new Box(Picture.EMPTY, Picture.IMAGE_SIZE * i, Picture.IMAGE_SIZE * j));
+                }
+            }
+        }
+    }
