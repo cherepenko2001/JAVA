@@ -1,0 +1,26 @@
+//добавляет корабль предварительно проверяя - не пересекается ли новый корабль с уже добавленным ораблем
+    public void addShip(Ship ship) {
+        List<Box> boxesOfShip = ship.getBoxesOfShip();
+        for (Box boxShip : boxesOfShip) {
+            if (checkAround(boxShip, boxesOfShip)) {
+                boxesOfShip.clear();
+                return;
+            }
+        }
+        if (boxesOfShip.size() != 0) model.addShip(ship);
+    }
+
+    //удаляет корабль по заданным координатам
+    public Ship removeShip(int x, int y) {
+        List<Ship> allShips = model.getAllShips(); //получаем список всех добавленных кораблей
+        for (Ship ship : allShips) {
+            for (Box box : ship.getBoxesOfShip()) {
+                if (x == box.getX() && y == box.getY()) { //перебираем корабли, затем их боксы,
+                    // если координаты бокса совпадают с заданными - удаляем корабль
+                    model.removeShip(ship);
+                    return ship;
+                }
+            }
+        }
+        return null;
+    }
