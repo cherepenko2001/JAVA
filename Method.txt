@@ -1,0 +1,34 @@
+//метод проверки на пересечение с другими короблями
+    private boolean checkAround(Box box, List<Box> boxesOfShip) {
+        int myX = box.getX();
+        int myY = box.getY();
+        for (int i = myX - Picture.IMAGE_SIZE; i <= myX + Picture.IMAGE_SIZE; i += Picture.IMAGE_SIZE) {
+            for (int j = myY - Picture.IMAGE_SIZE; j <= myY + Picture.IMAGE_SIZE; j += Picture.IMAGE_SIZE) {
+                Box boxFromMatrix = model.getBox(model.getMyField(), i, j);
+                if (boxFromMatrix != null && boxFromMatrix.getPicture() == Picture.SHIP && !boxesOfShip.contains(boxFromMatrix)) {
+                    View.callInformationWindow("Сюда нельзя добавлять корабль - пересечение с другим");
+                    boxesOfShip.clear();
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    //метод открывающий путсые клетки вокруг подбитого корабля на поле противника
+    public void openBoxesAround(Box boxShot) {
+        Ship ship = model.getShipOfEnemy(boxShot); //по боксу в который выстрелили получаем корабль
+        if (ship != null) {
+            //если число палуб == числу подбитых (открытых) боксов корабля - то открываем все пустые клетки вокруг
+            if (ship.getCountDeck() == getCountOpenBoxOfShip(ship)) model.openAllBoxesAroundShip(ship);
+                //иначе если подбита (отрыт бокс) только одна палуба - ничего не делаем
+            else if (getCountOpenBoxOfShip(ship) == 1) return;
+                // в остальных случаях открываем пустые клетки вокруг подбитых палуб
+            else {
+                for (Box box : ship.getBoxesOfShip()) {
+                    if (box.isOpen())
+                        model.openBoxAroundBoxOfShipEnemy(box.getX(), box.getY(), ship.isHorizontalPlacement());
+                }
+            }
+        }
+    }
