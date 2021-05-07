@@ -1,0 +1,18 @@
+ //запускает сервре
+    private void startServer() {
+        try {
+            while (!allPlayersConnected) { //не всели игроки подключились?
+                Socket socket = serverSocket.accept(); //принимаем подключение клиента
+                if (listConnection.size() == 0) { //если в списке еще нет подключений, то...
+                    Connection connection = new Connection(socket);
+                    listConnection.add(connection); //добавляем коннекшн в список
+                    connection.send(new Message(MessageType.ACCEPTED)); //отправляем клиенту о принятии
+                    Message message = connection.receive();  //ждем от клиента матрицу его поля и спислк кораблей
+                    if (message.getMessageType() == MessageType.FIELD) {
+                        //устанавливаем поле и корабли в соотствующие поля
+                        fieldPlayer1 = message.getGameField();
+                        allShipsPlayer1 = message.getListOfAllShips();
+                    }
+                    //запускаем нить основного цикла общения клиента и сервера
+                    new ThreadConnection(connection).start();
+                }
