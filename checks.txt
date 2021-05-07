@@ -1,0 +1,19 @@
+ //проверка на окончание игры
+    private boolean checkEndGame() {
+        List<Box> allBoxesOfShip = model.getAllBoxesOfShips(); //получаем список всех своих кораблей
+        for (Box box : allBoxesOfShip) {
+            //проверяем сли хотя бы один корабль имеет значение картини SHIP то игра не окончена
+            if (box.getPicture() == Picture.SHIP) return false;
+        }
+        return true;
+    }
+
+    //проверка на полный комплект добавленный кораблей перед стартом игры
+    public boolean checkFullSetShips() {
+        //просто проверяем количство корабля в соответствующих списках по каждому типу кораблей
+        if (model.getShipsOneDeck().size() == 4 &&
+                model.getShipsTwoDeck().size() == 3 &&
+                model.getShipsThreeDeck().size() == 2 &&
+                model.getShipsFourDeck().size() == 1) return true;
+        else return false;
+    }
