@@ -1,0 +1,16 @@
+//метод создания корабля горизонтальной ориентации по заданным кординатам x и y
+    public void createHorizontalShip(int x, int y) {
+        //для того чтобы корабль не отрисовался за пределами игрового поля, высчитываем максимально возможную координату по X для отрисовки с учетом количества палуб
+        int pointLimitValueForPaint = (Picture.COLUMNS - countDeck) * Picture.IMAGE_SIZE;
+        for (int i = 0; i < countDeck; i++) {
+            Box newBox;
+            //если Х больше максимально допустимой точки отрисовки, то координата по Х для бокса = pointLimitValueForPaint + i * Picture.IMAGE_SIZE
+            if (x > pointLimitValueForPaint) {
+                newBox = new Box(Picture.SHIP, pointLimitValueForPaint + i * Picture.IMAGE_SIZE, y);
+                boxesOfShip.add(newBox);
+            } else {
+                newBox = new Box(Picture.SHIP, (x + i * Picture.IMAGE_SIZE), y);
+                boxesOfShip.add(newBox);
+            }
+        }
+    }
