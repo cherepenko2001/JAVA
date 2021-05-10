@@ -1,0 +1,23 @@
+public ThreadConnection(Connection connection) {
+            this.connection = connection;
+        }
+
+        private void mainCicle(Connection connection) {
+            try {
+                while (!stopCicle) {
+                    Message message = connection.receive(); //принимаем сообщение от клиента
+                    //если дисконнект, то перенаправляем сообщение клиенту противника и останавливаем цикл
+                    if (message.getMessageType() == MessageType.DISCONNECT || message.getMessageType() == MessageType.DEFEAT) {
+                        sendMessageEnemy(message);
+                        stopCicle = true;
+                    //если тип сообщения MY_DISCONNECT то просто останавливаем цикл
+                    } else if (message.getMessageType() == MessageType.MY_DISCONNECT) {
+                        stopCicle = true;
+                    // в любом друго случае перенаправляем сообщение противнику
+                    } else sendMessageEnemy(message);
+                }
+                connection.close();
+            } catch (Exception e) {
+                View.callInformationWindow("Ошибка при обмене выстрелами. Связь потеряна");
+            }
+        }

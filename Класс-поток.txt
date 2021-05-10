@@ -1,0 +1,9 @@
+//класс-поток исполнения для основного цикла общения клиента и сервера
+    private class ThreadConnection extends Thread {
+        private Connection connection;
+        private volatile boolean stopCicle = false; //флаг прерывания цикла
+
+
+        public ThreadConnection(Connection connection) {
+            this.connection = connection;
+        }
