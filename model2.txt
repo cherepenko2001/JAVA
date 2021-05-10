@@ -1,0 +1,41 @@
+ //метод, который возвращает ВСЕ боксы из ВСЕХ наших кораблей
+    public List<Box> getAllBoxesOfShips() {
+        List<Box> allBoxes = new ArrayList<>();
+        List<Ship> allShips = getAllShips();
+        for (Ship ship : allShips) {
+            allBoxes.addAll(ship.getBoxesOfShip());
+        }
+        return allBoxes;
+    }
+
+    public List<Ship> getShipsOneDeck() {
+        return shipsOneDeck;
+    }
+
+    public List<Ship> getShipsTwoDeck() {
+        return shipsTwoDeck;
+    }
+
+    public List<Ship> getShipsThreeDeck() {
+        return shipsThreeDeck;
+    }
+
+    public List<Ship> getShipsFourDeck() {
+        return shipsFourDeck;
+    }
+
+    public Box[][] getMyField() {
+        return myField;
+    }
+
+    public void setMyField(Box[][] myField) {
+        this.myField = myField;
+    }
+
+    public Box[][] getEnemyField() {
+        return enemyField;
+    }
+
+    public void setEnemyField(Box[][] enemyField) {
+        this.enemyField = enemyField;
+    }
