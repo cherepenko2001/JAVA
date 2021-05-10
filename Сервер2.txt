@@ -1,0 +1,14 @@
+else if (listConnection.size() == 1) {
+                    Connection connection = new Connection(socket);
+                    listConnection.add(connection);
+                    connection.send(new Message(MessageType.ACCEPTED));
+                    Message message = connection.receive();
+                    if (message.getMessageType() == MessageType.FIELD) {
+                        fieldPlayer2 = message.getGameField();
+                        allShipsPlayer2 = message.getListOfAllShips();
+                        connection.send(new Message(MessageType.FIELD, fieldPlayer1, allShipsPlayer1));
+                        listConnection.get(0).send(new Message(MessageType.FIELD, fieldPlayer2, allShipsPlayer2));
+                    }
+                    new ThreadConnection(connection).start();
+                    allPlayersConnected = true;
+                }
