@@ -1,0 +1,9 @@
+public void loadEmptyMyField() {
+        controller.loadEmptyMyField();
+        myField.repaint();            //переотрисовка нашего игрового поля
+        //установка имени радиоБаттонов на панели выбора настроек добавления корабля
+        choosePanel.setNameOneDeck(4);
+        choosePanel.setNameTwoDeck(3);
+        choosePanel.setNameThreeDeck(2);
+        choosePanel.setNameFourDeck(1);
+    }
