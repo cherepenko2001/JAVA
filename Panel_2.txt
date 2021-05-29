@@ -1,0 +1,24 @@
+  возвращает кол-во палуб в зависимости - какой радиоБаттон выбран
+    public int getCountDeck() {
+        if (oneDeck.isSelected()) return 1;
+        else if (twoDeck.isSelected()) return 2;
+        else if (threeDeck.isSelected()) return 3;
+        else if (fourDeck.isSelected()) return 4;
+        else return 0;
+    }
+
+    возвращает число обозначающее какая ориентация корабля выбрана
+    public int getPlacement() {
+        if (vertical.isSelected()) return 1;
+        else if (horizontal.isSelected()) return 2;
+        else return 0;
+    }
+
+    класс слушатель который загружает пустое поле при нажатии кнопки Убрать все корабли
+    private class ActionClearField implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            view.loadEmptyMyField();
+        }
+    }
