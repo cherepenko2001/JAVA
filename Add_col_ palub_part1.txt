@@ -1,0 +1,27 @@
+//добавляет заданный корабль в соответствующий список кораблей в зависимости от количества палуб
+    public void addShip(Ship ship) {
+        int countDeck = ship.getCountDeck();
+        switch (countDeck) {
+            case 1: {
+                //проверка - если в списке уже есть максимальное кол-во кораблей данного типа (кол-во палуб)
+                //то вызывается соответствующее информационное окно, иначе добавляем корабль в нужный список
+                if (shipsOneDeck.size() < 4) {
+                    shipsOneDeck.add(ship);
+                    for (Box box : ship.getBoxesOfShip()) {
+                        addBoxInField(myField, box);
+                    }
+                } else View.callInformationWindow("Перебор однопалубных. Максимально возможно - 4.");
+                break;
+            }
+            case 2: {
+                if (shipsTwoDeck.size() < 3) {
+                    shipsTwoDeck.add(ship);
+                    for (Box box : ship.getBoxesOfShip()) {
+                        addBoxInField(myField, box);
+                    }
+                } else View.callInformationWindow("Перебор двухпалубных. Максимально возможно - 3.");
+                break;
+            }
+            
+        }
+    }
