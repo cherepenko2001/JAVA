@@ -1,0 +1,23 @@
+
+    public void changeCountShipOnChoosePanel(int countDeck) {
+        switch (countDeck) {
+            case 1: {
+                
+                choosePanel.setNameOneDeck(4 - model.getShipsOneDeck().size());
+                break;
+            }
+            case 2: {
+                choosePanel.setNameTwoDeck(3 - model.getShipsTwoDeck().size());
+                break;
+            }
+            case 3: {
+                choosePanel.setNameThreeDeck(2 - model.getShipsThreeDeck().size());
+                break;
+            }
+            case 4: {
+                choosePanel.setNameFourDeck(1 - model.getShipsFourDeck().size());
+                break;
+            }
+        }
+        choosePanel.revalidate();
+    }
