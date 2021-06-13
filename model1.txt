@@ -1,0 +1,28 @@
+package mvc;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Model {
+    private Box[][] myField = new Box[Picture.COLUMNS][Picture.ROWS]; //матрица с боксами нашего игрового поля
+    private Box[][] enemyField = new Box[Picture.COLUMNS][Picture.ROWS];  //матрица с боксами ирового поля соперника
+    private List<Ship> shipsOneDeck = new ArrayList<>(); //список всех наших однопалубных кораблей
+    private List<Ship> shipsTwoDeck = new ArrayList<>(); //список всех наших двухпалубных кораблей
+    private List<Ship> shipsThreeDeck = new ArrayList<>(); //список всех наших трехпалубных кораблей
+    private List<Ship> shipsFourDeck = new ArrayList<>(); //список всех наших четырехпалубных кораблей
+    private List<Ship> allShipsOfEnemy = new ArrayList<>(); //список всех кораблей соперниа
+
+
+    public void setAllShipsOfEnemy(List<Ship> allShipsOfEnemy) {
+        this.allShipsOfEnemy = allShipsOfEnemy;
+    }
+
+    //метод, который возвращает список ВСЕХ наших ораблей
+    public List<Ship> getAllShips() {
+        List<Ship> allBoxesOfShips = new ArrayList<>();
+        allBoxesOfShips.addAll(shipsFourDeck);
+        allBoxesOfShips.addAll(shipsThreeDeck);
+        allBoxesOfShips.addAll(shipsTwoDeck);
+        allBoxesOfShips.addAll(shipsOneDeck);
+        return allBoxesOfShips;
+    }
